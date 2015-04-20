@@ -61,24 +61,28 @@ student input_student_info( int num_grades ) {
     // Struct variable for student
     student student_to_update;
     
+    // Pointer variable for saving info to struct
     student * p = &student_to_update;
     
     printf("\nEnter information for student:\n");
     printf("\tEnter SID:> ");
+    // Save input to sid
     scanf("%d", &(p->sid));
     
     printf("\tEnter last name:> ");
+    // Save input to last_name
     scanf("%s", &(p->last_name));
     
     printf("\tEnter first name:> ");
+    // Save input to first_name
     scanf("%s", &(p->first_name));
     
     // Initialize an array for list of grades
     float *list_of_grades = malloc(num_grades * sizeof(float));
     
-    // Prompt user for grades
     printf("\tEnter grades (separated by space):> ");
     
+    // Save list of grades
     int i;
     for(i = 0; i < num_grades; i++) {
         scanf("%f", &*(list_of_grades + i));
@@ -125,18 +129,25 @@ void print_student_info ( student *students, int num_students, int num_grades ) 
     int i;
     for (i = 0; i < num_students; i++) {
         
+        // Select student from students array
         student current_student = *(students + i);
         
-        printf("\nStudent ID #%d", current_student.sid);
-        printf("\n\tName: %s %s", current_student.first_name, current_student.last_name);
-        printf("\n\tGrades: ");
+        // Give one extra space if first student
+        if (i == 0) {
+        printf("\n\nStudent ID #%d:", current_student.sid);
+        } else {
+            printf("\nStudent ID #%d:", current_student.sid);
+        }
+        printf("\n\tName:\t %s %s", current_student.first_name, current_student.last_name);
+        printf("\n\tGrades:\t ");
         
+        // Print list of student's grades
         int j;
         for (j = 0; j < num_grades; j++) {
             printf("%.1f ", current_student.list_of_grades[j]);
         }
         
-        printf("\n\tGPA: %.2f", current_student.gpa);
+        printf("\n\tGPA:\t %.2f", current_student.gpa);
     }
 }
 // End print_student_info
